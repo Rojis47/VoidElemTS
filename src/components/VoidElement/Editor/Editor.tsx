@@ -22,7 +22,7 @@ type EditorProps = {
   displayName: string;
   language: "xml" | "css" | "javascript";
   value: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
+  onChange: (value: string) => void;
   editorPosition: "top" | "left" | "right";
 };
 

@@ -16,7 +16,25 @@ const ProjectSchema = z.object({
   description: z.string(),
   html: z.string(),
   css: z.string(),
-  js: z.string(),
+  javascript: z.string(),
 });
 
 export type Project = z.infer<typeof ProjectSchema>;
+
+const FavoriteSchema = z.object({
+  userId: z.number(),
+  projectId: z.number(),
+});
+
+export type Favorite = z.infer<typeof FavoriteSchema>;
+
+const ActiveSelectorSchema = z.union([
+  z.literal("home"),
+  z.literal("myVoidElements"),
+  z.literal("exploreVoidElements"),
+  z.literal("favorites"),
+  z.literal("create"),
+  z.literal("user"),
+]);
+
+export type TActiveSelector = z.infer<typeof ActiveSelectorSchema>;

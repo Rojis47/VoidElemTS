@@ -10,6 +10,8 @@ import EditorRight from "../Icons/EditorRight";
 import EditorModal from "../EditorModal";
 import styles from "../Editor/Editor.module.css";
 import PropTypes from "prop-types";
+import FavoriteVoidElement from "../FavoriteVoidElement";
+import SaveVoidElement from "../../SaveVoidElement";
 
 type HeaderProps = {
   editorPosition: "top" | "left" | "right";
@@ -20,6 +22,9 @@ type HeaderProps = {
     React.SetStateAction<boolean | undefined>
   >;
   name: string;
+  isFavorite: boolean;
+  setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
+  projectId: number;
 };
 
 const Header = ({
@@ -27,6 +32,9 @@ const Header = ({
   changeEditorPosition,
   changeAbstractDarkTheme,
   name,
+  isFavorite,
+  setIsFavorite,
+  projectId,
 }: HeaderProps) => {
   const [isEditorModalActive, setIsEditorModalActive] = useState(false);
 
@@ -88,6 +96,16 @@ const Header = ({
               </li>
             </ul>
           </div>
+        </div>
+        <div className={HeaderStyles["header-action-btn"]}>
+          <SaveVoidElement />
+        </div>
+        <div className={HeaderStyles["header-action-btn"]}>
+          <FavoriteVoidElement
+            projectId={projectId}
+            isFavorite={isFavorite}
+            onClick={() => setIsFavorite(!isFavorite)}
+          />
         </div>
         <div
           className={`${HeaderStyles["header-action-btn"]} ${HeaderStyles["theme-btn"]}`}

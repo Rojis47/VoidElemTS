@@ -1,14 +1,15 @@
 import { useState } from "react";
 import Editor from "./Editor/Editor";
-import Console from "./Console";
 import Header from "./Header/Header";
 import ThemeContext from "../../contexts/ThemeContext";
 import "../../styles/voidElement.css";
+import { useProjects } from "../../contexts/ProjectsProvider";
 type VoidElementProps = {
   initialHtml: string;
   initialCss: string;
   initialJs: string;
   name: string;
+  projectId: number;
 };
 
 export default function VoidElement({
@@ -16,6 +17,7 @@ export default function VoidElement({
   initialCss,
   initialJs,
   name,
+  projectId,
 }: VoidElementProps) {
   const [html, setHtml] = useState<string>(initialHtml);
   const [css, setCss] = useState<string>(initialCss);
@@ -26,6 +28,7 @@ export default function VoidElement({
   const [abstractDarkTheme, setAbstractDarkTheme] = useState<
     boolean | undefined
   >();
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   const srcDoc = `
   <html>
@@ -34,6 +37,22 @@ export default function VoidElement({
     <script>${javascript}</script>
   </html>
   `;
+
+  const { handleProjectUpdateChange } = useProjects();
+  const handleHtmlChange = (newHtml: string) => {
+    setHtml(newHtml);
+    handleProjectUpdateChange("html", newHtml);
+  };
+
+  const handleCssChange = (newCss: string) => {
+    setCss(newCss);
+    handleProjectUpdateChange("css", newCss);
+  };
+
+  const handleJavascriptChange = (newJavascript: string) => {
+    setJavascript(newJavascript);
+    handleProjectUpdateChange("javascript", newJavascript);
+  };
 
   type PaneStyles = {
     paneContainer: React.CSSProperties;
@@ -61,6 +80,9 @@ export default function VoidElement({
         <div className="m-4 border-2 border-dashed rounded border-slate-600 bg-slate-800">
           {" "}
           <Header
+            projectId={projectId}
+            setIsFavorite={setIsFavorite}
+            isFavorite={isFavorite}
             name={name}
             editorPosition={editorPosition}
             changeEditorPosition={setEditorPosition}
@@ -89,21 +111,21 @@ export default function VoidElement({
                   displayName="HTML"
                   language="xml"
                   value={html}
-                  onChange={setHtml}
+                  onChange={handleHtmlChange}
                   editorPosition={editorPosition}
                 />
                 <Editor
                   displayName="CSS"
                   language="css"
                   value={css}
-                  onChange={setCss}
+                  onChange={handleCssChange}
                   editorPosition={editorPosition}
                 />
                 <Editor
                   displayName="Javascript"
                   language="javascript"
                   value={javascript}
-                  onChange={setJavascript}
+                  onChange={handleJavascriptChange}
                   editorPosition={editorPosition}
                 />
               </div>

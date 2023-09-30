@@ -1,8 +1,11 @@
 import { useState } from "react";
 
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { BiGridAlt } from "react-icons/bi";
 import { AiFillHeart, AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
+import { HiRocketLaunch } from "react-icons/hi2";
+import { useProjects } from "../contexts/ProjectsProvider";
 
 export type NavItemProps = {
   children: React.ReactNode;
@@ -12,7 +15,7 @@ export type NavItemProps = {
 };
 
 const SideNav = () => {
-  const [selected, setSelected] = useState(0);
+  const { activeSelector, setActiveSelector } = useProjects();
 
   return (
     // NOTE: In prod, you'd likely set height to h-screen and fix to the viewport
@@ -33,16 +36,47 @@ const SideNav = () => {
           fill="#FFFFFF"
         ></path>
       </svg>
-      <NavItem selected={selected === 2} id={2} setSelected={setSelected}>
+
+      <NavItem
+        selected={activeSelector === "home"}
+        id={0}
+        setSelected={() => setActiveSelector("home")}
+      >
         <AiFillHome />
       </NavItem>
-      <NavItem selected={selected === 0} id={0} setSelected={setSelected}>
+      <NavItem
+        selected={activeSelector === "myVoidElements"}
+        id={1}
+        setSelected={() => setActiveSelector("myVoidElements")}
+      >
+        <BiGridAlt />
+      </NavItem>
+      <NavItem
+        selected={activeSelector === "exploreVoidElements"}
+        id={2}
+        setSelected={() => setActiveSelector("exploreVoidElements")}
+      >
         <BsFillGrid3X3GapFill />
       </NavItem>
-      <NavItem selected={selected === 1} id={1} setSelected={setSelected}>
+      <NavItem
+        selected={activeSelector === "favorites"}
+        id={3}
+        setSelected={() => setActiveSelector("favorites")}
+      >
         <AiFillHeart />
       </NavItem>
-      <NavItem selected={selected === 4} id={4} setSelected={setSelected}>
+      <NavItem
+        selected={activeSelector === "create"}
+        id={4}
+        setSelected={() => setActiveSelector("create")}
+      >
+        <HiRocketLaunch />
+      </NavItem>
+      <NavItem
+        selected={activeSelector === "user"}
+        id={5}
+        setSelected={() => setActiveSelector("user")}
+      >
         <FaUserAlt />
       </NavItem>
     </nav>
