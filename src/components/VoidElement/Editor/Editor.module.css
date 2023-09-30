@@ -1,0 +1,11 @@
+.expand-collapse-button{
+    margin-left: .5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.collapse{
+    height: 20% !important;
+}

@@ -1,0 +1,27 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "username": "alice123",
+        "password": "hashed_password",
+        "email": "alice@example.com"
+      },
+      {
+        "id": 2,
+        "username": "bob456",
+        "password": "hashed_password",
+        "email": "bob@example.com"
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "userId": 1,
+        "name": "Centered Navbar Project",
+        "description": "This is a centered navbar example.",
+        "html": "<div class=\"navbar\">\n  <div class=\"navbar-logo\">Title</div>\n  <ul class=\"navbar-links\" id=\"navbar-list\">\n    <li><a href=\"#\" class=\"navbar-link\">Home</a></li>\n    <li><a href=\"#\" class=\"navbar-link\">About</a></li>\n    <li><a href=\"#\" class=\"navbar-link\">Cart</a></li>\n  </ul>\n</div>",
+        "css": ".navbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 10px 30px;\n  background-color: #333;\n}\n\n.navbar-logo, .navbar-links {\n  flex: 1;\n  text-align: center;\n}\n\n.navbar-logo {\n  color: #fff;\n  font-size: 24px;\n}\n\n.navbar-links {\n  list-style-type: none;\n  padding: 0;\n  display: flex;\n  gap: 15px;\n  justify-content: center;\n}\n\n.navbar-link {\n  text-decoration: none;\n  color: #fff;\n  transition: color 0.3s ease;\n}\n\n.navbar-link:hover {\n  color: #ddd;\n}",
+        "js": "/* You can add interactivity here if needed */"
+      }
+    ]
+  }
