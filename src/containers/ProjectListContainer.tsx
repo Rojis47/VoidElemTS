@@ -7,9 +7,8 @@ export default function ProjectListContainer() {
     <div>
       {projects.map((project) => (
         <div key={project.id}>
-          <h3>{project.name}</h3>
-          <p>{project.description}</p>
           <VoidElement
+            name={project.name}
             initialHtml={project.html}
             initialCss={project.css}
             initialJs={project.js}

@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect, SetStateAction } from "react";
 import HeaderStyles from "./Header.module.css";
 import { themeContext, setThemeContext } from "../../../contexts/ThemeContext";
-import FavourzLogoWhite from "../../../assets/img/favourz-logo-white.png";
-import FavourzLogoBlack from "../../../assets/img/favourz-logo-black.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
@@ -21,12 +19,14 @@ type HeaderProps = {
   changeAbstractDarkTheme: React.Dispatch<
     React.SetStateAction<boolean | undefined>
   >;
+  name: string;
 };
 
 const Header = ({
   editorPosition = "top",
   changeEditorPosition,
   changeAbstractDarkTheme,
+  name,
 }: HeaderProps) => {
   const [isEditorModalActive, setIsEditorModalActive] = useState(false);
 
@@ -55,10 +55,7 @@ const Header = ({
   return (
     <header className={HeaderStyles.header} style={headerConditionalStyle}>
       <div className={`${HeaderStyles["logo-wrapper"]}`}>
-        <img
-          src={darkThemeContext ? FavourzLogoWhite : FavourzLogoBlack}
-          alt="Favour Okoh Logo"
-        />
+        <h3 className="text-2xl font-bold">{name}</h3>
       </div>
       <div className={HeaderStyles["header-action-wrapper"]}>
         <div

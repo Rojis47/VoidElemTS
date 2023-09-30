@@ -17,16 +17,6 @@ header {
   -o-transition: all 0.518s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-header .logo-wrapper {
-  overflow: hidden;
-}
-
-.logo-wrapper img {
-  width: 100px;
-  height: 40px;
-  transition: all 0.5s ease-out;
-}
-
 .header-action-wrapper {
   display: flex;
   justify-content: center;
