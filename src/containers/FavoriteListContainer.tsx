@@ -1,13 +1,12 @@
-import { useProjects } from "../contexts/ProjectsProvider";
 import VoidElement from "../components/VoidElement/VoidElement";
 import { useFavorites } from "../contexts/FavoritesProvider";
 
 export default function AllProjectListContainer() {
   const { favoritedProjects } = useFavorites();
   return (
-    <div>
-      {favoritedProjects.map((project) => (
-        <div key={project.id}>
+    <div className="flex flex-col items-center justify-center w-full">
+      {favoritedProjects.map((project, index) => (
+        <div className="w-full" key={index}>
           <VoidElement
             projectId={project.id}
             name={project.name}

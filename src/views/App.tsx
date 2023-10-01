@@ -23,7 +23,7 @@ export default function App() {
     <FavoritesProvider>
       <div className="flex bg-slate-900 text-slate-100">
         <SideNav />
-        <div>{renderComponentBySelector(activeSelector)}</div>
+        {renderComponentBySelector(activeSelector)}
       </div>
     </FavoritesProvider>
   );

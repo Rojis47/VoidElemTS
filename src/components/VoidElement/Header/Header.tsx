@@ -25,6 +25,7 @@ type HeaderProps = {
   isFavorite: boolean;
   setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>;
   projectId: number;
+  handleUpdateFields: (id: number) => void;
 };
 
 const Header = ({
@@ -35,6 +36,7 @@ const Header = ({
   isFavorite,
   setIsFavorite,
   projectId,
+  handleUpdateFields,
 }: HeaderProps) => {
   const [isEditorModalActive, setIsEditorModalActive] = useState(false);
 
@@ -98,7 +100,7 @@ const Header = ({
           </div>
         </div>
         <div className={HeaderStyles["header-action-btn"]}>
-          <SaveVoidElement />
+          <SaveVoidElement handleUpdateFields={handleUpdateFields} />
         </div>
         <div className={HeaderStyles["header-action-btn"]}>
           <FavoriteVoidElement

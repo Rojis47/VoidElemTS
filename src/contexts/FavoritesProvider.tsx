@@ -18,6 +18,7 @@ interface FavoritesContextType {
   loading: boolean;
   error: string | null;
   favoritedProjects: Project[];
+  userId: number;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(
@@ -29,7 +30,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favoritedProjects, setFavoritedProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const userId = 1;
+  const userId = 2;
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -66,6 +67,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
         loading,
         error,
         favoritedProjects,
+        userId,
       }}
     >
       {children}

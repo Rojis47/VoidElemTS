@@ -12,14 +12,18 @@ interface ProjectsContextType {
   projects: Project[];
   loading: boolean;
   error: string | null;
-  updateProject: (id: number, newHtmlValue: string) => Promise<void>;
+  updateProject: (id: number) => Promise<void>;
   handleProjectUpdateChange: (
     field: "html" | "css" | "javascript",
     value: string
   ) => void;
-  handleUpdateFields: () => void;
+
   activeSelector: TActiveSelector;
   setActiveSelector: (selector: TActiveSelector) => void;
+  originalProject: Project | null;
+  editedProject: Project | null;
+  setOriginalProject: (project: Project) => void;
+  setEditedProject: (project: Project) => void;
 }
 
 const ProjectsContext = createContext<ProjectsContextType | undefined>(
@@ -34,10 +38,7 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
   const [originalProject, setOriginalProject] = useState<Project | null>(null);
   const [editedProject, setEditedProject] = useState<Project | null>(null);
 
-  useEffect(() => {
-    setOriginalProject(projects[0]);
-    setEditedProject(projects[0]);
-  }, [projects]);
+  //!original prj not setting
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,37 +58,20 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
     field: "html" | "css" | "javascript",
     value: string
   ) => {
-    if (editedProject) {
-      setEditedProject({ ...editedProject, [field]: value });
-    }
+    setEditedProject({ ...editedProject, [field]: value });
   };
 
   const updateProject = async (id: number) => {
-    if (!originalProject || !editedProject) return;
+    if (!editedProject) return;
 
-    const updates: Partial<Project> = {};
+    // Here, we're sending the entire editedProject, without checking for differences.
+    const response = await Requests.patchUpdateProject(id, editedProject);
 
-    if (originalProject.html !== editedProject.html) {
-      updates.html = editedProject.html;
-    }
-    if (originalProject.css !== editedProject.css) {
-      updates.css = editedProject.css;
-    }
-    if (originalProject.javascript !== editedProject.javascript) {
-      updates.javascript = editedProject.javascript;
+    if (response && response.data) {
+      setOriginalProject(editedProject); // Update the originalProject after saving
     }
 
-    const response = await Requests.patchUpdateProject(id, updates);
-    setOriginalProject(editedProject);
     return response.data;
-  };
-
-  const handleUpdateFields = async () => {
-    try {
-      await updateProject(projects[0].id);
-    } catch (error) {
-      console.error("Failed to update project:", error);
-    }
   };
 
   return (
@@ -98,9 +82,12 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
         error,
         updateProject,
         handleProjectUpdateChange,
-        handleUpdateFields,
         activeSelector,
         setActiveSelector,
+        originalProject,
+        editedProject,
+        setOriginalProject,
+        setEditedProject,
       }}
     >
       {children}

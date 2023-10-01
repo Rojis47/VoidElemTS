@@ -24,6 +24,7 @@ type EditorProps = {
   value: string;
   onChange: (value: string) => void;
   editorPosition: "top" | "left" | "right";
+  projectId: number;
 };
 
 export default function Editor({
