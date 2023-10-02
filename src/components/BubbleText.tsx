@@ -1,6 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 
-const BubbleText = ({ text }) => {
+interface BubbleTextProps {
+  text: string;
+}
+
+const BubbleText: FC<BubbleTextProps> = ({ text }) => {
   return (
     <div className=" place-content-center">
       <TextEffect text={text} />
@@ -8,7 +12,11 @@ const BubbleText = ({ text }) => {
   );
 };
 
-const TextEffect = ({ text }) => {
+interface TextEffectProps {
+  text: string;
+}
+
+const TextEffect: FC<TextEffectProps> = ({ text }) => {
   useEffect(() => {
     const spans = document.querySelectorAll(".hover-text span");
 
@@ -17,8 +25,8 @@ const TextEffect = ({ text }) => {
         this.style.fontWeight = "900";
         this.style.color = "rgb(238, 242, 255)";
 
-        const leftNeighbor = this.previousElementSibling;
-        const rightNeighbor = this.nextElementSibling;
+        const leftNeighbor = this.previousElementSibling as HTMLElement | null;
+        const rightNeighbor = this.nextElementSibling as HTMLElement | null;
 
         if (leftNeighbor) {
           leftNeighbor.style.fontWeight = "500";
@@ -34,8 +42,8 @@ const TextEffect = ({ text }) => {
         this.style.fontWeight = "100";
         this.style.color = "rgb(165, 180, 252)";
 
-        const leftNeighbor = this.previousElementSibling;
-        const rightNeighbor = this.nextElementSibling;
+        const leftNeighbor = this.previousElementSibling as HTMLElement | null;
+        const rightNeighbor = this.nextElementSibling as HTMLElement | null;
 
         if (leftNeighbor) {
           leftNeighbor.style.fontWeight = "100";
@@ -57,7 +65,11 @@ const TextEffect = ({ text }) => {
   );
 };
 
-const Text = ({ children }) => {
+interface TextProps {
+  children: string;
+}
+
+const Text: FC<TextProps> = ({ children }) => {
   return (
     <>
       {children.split("").map((child, idx) => (
