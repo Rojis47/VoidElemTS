@@ -86,7 +86,7 @@ export default function VoidElement({
     <ThemeContext>
       <div className="flex justify-center w-full mx-auto">
         <div className="w-2/3 h-full ">
-          <div className="w-full m-4 border-2 border-dashed rounded border-slate-600 bg-slate-800">
+          <div className="w-full m-4 border-2 border-indigo-300 rounded">
             {" "}
             <Header
               handleUpdateFields={handleUpdateFields}
@@ -99,7 +99,7 @@ export default function VoidElement({
               changeAbstractDarkTheme={setAbstractDarkTheme}
             />
           </div>
-          <div className="w-full m-4 border-2 border-dashed rounded border-slate-600 bg-slate-800">
+          <div className="w-full m-4 border-2 border-indigo-300 rounded bg-slate-800">
             <div className={`w-full ${abstractDarkTheme ? "dark" : "light"}`}>
               <div
                 className="pane-container"

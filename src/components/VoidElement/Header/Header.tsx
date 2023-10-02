@@ -12,6 +12,7 @@ import styles from "../Editor/Editor.module.css";
 import PropTypes from "prop-types";
 import FavoriteVoidElement from "../FavoriteVoidElement";
 import SaveVoidElement from "../../SaveVoidElement";
+import BubbleText from "../../BubbleText";
 
 type HeaderProps = {
   editorPosition: "top" | "left" | "right";
@@ -52,7 +53,7 @@ const Header = ({
   };
 
   const headerConditionalStyle = {
-    backgroundColor: darkThemeContext ? "hsl(225, 6%, 25%)" : "white",
+    backgroundColor: darkThemeContext ? "black" : "white",
     color: darkThemeContext ? "white" : "hsl(225, 6%, 25%)",
     fill: darkThemeContext ? "white" : "hsl(225, 6%, 25%)",
   };
@@ -64,8 +65,10 @@ const Header = ({
   }, [darkThemeContext, changeAbstractDarkTheme]);
   return (
     <header className={HeaderStyles.header} style={headerConditionalStyle}>
-      <div className={`${HeaderStyles["logo-wrapper"]}`}>
-        <h3 className="text-2xl font-bold">{name}</h3>
+      <div className={` ${HeaderStyles["logo-wrapper"]}`}>
+        <h3 className="text-2xl font-bold">
+          <BubbleText text={name} />
+        </h3>
       </div>
       <div className={HeaderStyles["header-action-wrapper"]}>
         <div

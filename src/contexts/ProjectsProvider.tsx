@@ -38,8 +38,6 @@ export const ProjectsProvider = ({ children }: { children: ReactNode }) => {
   const [originalProject, setOriginalProject] = useState<Project | null>(null);
   const [editedProject, setEditedProject] = useState<Project | null>(null);
 
-  //!original prj not setting
-
   useEffect(() => {
     const fetchData = async () => {
       try {

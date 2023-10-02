@@ -15,13 +15,13 @@ const FavoriteVoidElement = ({
   isFavorite,
   projectId,
 }: FavoriteProps) => {
-  const { favoriteProject, userId } = useFavorites();
+  const { addFavorite, userId } = useFavorites();
 
   const handleFavoriteToggle = () => {
     if (isFavorite) {
       return;
     } else {
-      favoriteProject(userId, projectId);
+      addFavorite(userId, projectId);
     }
     onClick();
   };

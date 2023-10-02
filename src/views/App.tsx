@@ -10,7 +10,7 @@ export default function App() {
 
   const renderComponentBySelector = (selector: TActiveSelector) => {
     switch (selector) {
-      case "home":
+      case "exploreVoidElements":
         return <AllProjectListContainer />;
       case "favorites":
         return <FavoritesListContainer />;

@@ -38,28 +38,6 @@ export const fetchFavorites = async () => {
 };
 
 
-export const fetchFavoriteProjectsByUserId = async (userId: number): Promise<object[]> => {
-  try {
-    // Fetch all favorites for the user
-    const favoritesResponse = await instance.get(`/favorites?userId=${userId}`);
-    const favoriteProjectIds: number[] = favoritesResponse.data.map((fav: { projectId: number }) => fav.projectId);
-
-    if (!favoriteProjectIds.length) return [];
-
-    // Fetch details for each favorite project
-    const favoriteProjectsPromises = favoriteProjectIds.map((projectId: number) => 
-      instance.get(`/projects/${projectId}`)
-    );
-
-    const projectsResponse = await Promise.all(favoriteProjectsPromises);
-
-    return projectsResponse.map((res: { data: object }) => res.data);
-  } catch (error) {
-    console.error('Error fetching favorite projects for user:', error);
-    throw error;
-  }
-};
-
 export const postFavoriteProject = async (userId: number, projectId: number) => {
   try {
     const response = await instance.post('/favorites', {
@@ -79,6 +57,5 @@ export const Requests = {
   patchUpdateProject,
   fetchFavorites,
   postFavoriteProject,
-  fetchFavoriteProjectsByUserId
 };
 

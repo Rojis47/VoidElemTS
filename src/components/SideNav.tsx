@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { BiGridAlt } from "react-icons/bi";
 import { AiFillHeart, AiFillHome } from "react-icons/ai";
@@ -18,9 +16,7 @@ const SideNav = () => {
   const { activeSelector, setActiveSelector } = useProjects();
 
   return (
-    // NOTE: In prod, you'd likely set height to h-screen and fix to the viewport
     <nav className="flex flex-col items-center h-screen gap-2 p-4 w-fit bg-slate-950">
-      {/* Temp logo from https://logoipsum.com/ */}
       <svg
         width="40"
         height="28"
