@@ -13,6 +13,9 @@
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^1.5.1",
     "codemirror": "^5.65.11",
     "codemirror-console": "^3.0.4",
@@ -24,6 +27,7 @@
     "react-console-emulator": "^5.0.2",
     "react-dom": "^16.14.0",
     "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {

@@ -1,29 +1,48 @@
-import { TActiveSelector } from "../Types";
-import SideNav from "../components/SideNav";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AllProjectListContainer from "../containers/AllProjectListContainer";
-import { FavoritesProvider } from "../contexts/FavoritesProvider";
-import { useProjects } from "../contexts/ProjectsProvider";
 import FavoritesListContainer from "../containers/FavoriteListContainer";
+import { FavoritesProvider } from "../contexts/FavoritesProvider";
+import Nav from "../components/Nav";
 
 export default function App() {
-  const { activeSelector } = useProjects();
-
-  const renderComponentBySelector = (selector: TActiveSelector) => {
-    switch (selector) {
-      case "exploreVoidElements":
-        return <AllProjectListContainer />;
-      case "favorites":
-        return <FavoritesListContainer />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <FavoritesProvider>
       <div className="flex bg-slate-900 text-slate-100">
-        <SideNav />
-        {renderComponentBySelector(activeSelector)}
+        <Router>
+          <Nav />
+          <Routes>
+            <Route
+              exact={true}
+              path="/"
+              element={<div>Home Placeholder</div>}
+            />
+            <Route
+              exact={true}
+              path="/my-void-elements"
+              element={<div>My Void Elements Placeholder</div>}
+            />
+            <Route
+              exact={true}
+              path="/explore-void-elements"
+              element={<AllProjectListContainer />}
+            />
+            <Route
+              exact={true}
+              path="/favorites"
+              element={<FavoritesListContainer />}
+            />
+            <Route
+              exact={true}
+              path="/create"
+              element={<div>Create Placeholder</div>}
+            />
+            <Route
+              exact={true}
+              path="/user"
+              element={<div>User Placeholder</div>}
+            />
+          </Routes>
+        </Router>
       </div>
     </FavoritesProvider>
   );

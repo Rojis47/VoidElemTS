@@ -3,18 +3,21 @@ import { BiGridAlt } from "react-icons/bi";
 import { AiFillHeart, AiFillHome } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import { HiRocketLaunch } from "react-icons/hi2";
-import { useProjects } from "../contexts/ProjectsProvider";
 
-export type NavItemProps = {
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
+type NavItemProps = {
   children: React.ReactNode;
-  selected: boolean;
-  id: number;
+  to: string;
+  exact?: boolean;
   setSelected: (id: number) => void;
+  id: number;
+  selectedId: number | null;
 };
 
 const SideNav = () => {
-  const { activeSelector, setActiveSelector } = useProjects();
-
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   return (
     <nav className="flex flex-col items-center h-screen gap-2 p-4 w-fit bg-slate-950">
       <svg
@@ -34,44 +37,51 @@ const SideNav = () => {
       </svg>
 
       <NavItem
-        selected={activeSelector === "home"}
         id={0}
-        setSelected={() => setActiveSelector("home")}
+        exact
+        setSelected={setSelectedId}
+        selectedId={selectedId}
+        to="/"
       >
         <AiFillHome />
       </NavItem>
       <NavItem
-        selected={activeSelector === "myVoidElements"}
         id={1}
-        setSelected={() => setActiveSelector("myVoidElements")}
+        setSelected={setSelectedId}
+        selectedId={selectedId}
+        to="/my-void-elements"
       >
         <BiGridAlt />
       </NavItem>
       <NavItem
-        selected={activeSelector === "exploreVoidElements"}
         id={2}
-        setSelected={() => setActiveSelector("exploreVoidElements")}
+        setSelected={setSelectedId}
+        selectedId={selectedId}
+        to="/explore-void-elements"
       >
         <BsFillGrid3X3GapFill />
       </NavItem>
       <NavItem
-        selected={activeSelector === "favorites"}
         id={3}
-        setSelected={() => setActiveSelector("favorites")}
+        setSelected={setSelectedId}
+        selectedId={selectedId}
+        to="/favorites"
       >
         <AiFillHeart />
       </NavItem>
       <NavItem
-        selected={activeSelector === "create"}
         id={4}
-        setSelected={() => setActiveSelector("create")}
+        setSelected={setSelectedId}
+        selectedId={selectedId}
+        to="/create"
       >
         <HiRocketLaunch />
       </NavItem>
       <NavItem
-        selected={activeSelector === "user"}
         id={5}
-        setSelected={() => setActiveSelector("user")}
+        setSelected={setSelectedId}
+        selectedId={selectedId}
+        to="/user"
       >
         <FaUserAlt />
       </NavItem>
@@ -79,17 +89,26 @@ const SideNav = () => {
   );
 };
 
-const NavItem = ({ children, selected, id, setSelected }: NavItemProps) => {
+const NavItem: React.FC<NavItemProps> = ({
+  children,
+  to,
+  exact,
+  setSelected,
+  id,
+  selectedId,
+}) => {
+  const isActive = selectedId === id;
   return (
-    <button
-      className="relative p-3 text-xl transition-colors rounded-md bg-slate-800 hover:bg-slate-700"
+    <NavLink
       onClick={() => setSelected(id)}
+      to={to}
+      exact={exact}
+      className={`relative p-3 text-xl transition-colors rounded-md ${
+        isActive ? "bg-indigo-600" : "bg-slate-800 hover:bg-slate-700"
+      }`}
     >
-      <span className="relative z-10 block">{children}</span>
-      {selected && (
-        <span className="absolute inset-0 z-0 bg-indigo-600 rounded-md"></span>
-      )}
-    </button>
+      {children}
+    </NavLink>
   );
 };
 
